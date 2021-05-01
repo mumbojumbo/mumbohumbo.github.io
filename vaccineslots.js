@@ -30,8 +30,6 @@ const keepAvailableSessions = (centers) => {
 			let availableCapacity = sessions[session]['available_capacity'];
 			let minAgeLimit = sessions[session]['min_age_limit'];
 			let date = sessions[session]['date']
-			//console.log(session);
-			//console.log(session['min_age_limit']);
 		    if (availableCapacity >  0 && minAgeLimit <=18) {
 		    	availableSession['MinAge'] = minAgeLimit;
 			    availableSession['Slots'] = availableCapacity;
@@ -80,17 +78,11 @@ function generateTable(table, data) {
 
 
 findVaccineSlots().then(cowindata => {
-	console.log("starting");
 	let centers = cowindata['centers'];
 	let underFortyFiveCenters = centers.filter(keepAndPrintUnderFortyFiveCenters);
-	console.log(underFortyFiveCenters);
 	let availableSessions = keepAvailableSessions(underFortyFiveCenters);
 	let table = document.querySelector("table");
-	console.log(table);
 	let data = Object.keys(availableSessions[0]);
 	generateTableHead(table, data);
 	generateTable(table, availableSessions);
-
-
-		//document.write(myJson);
 });
