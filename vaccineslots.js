@@ -26,6 +26,8 @@ const keepAvailableSessions = (centers) => {
 		let sessions = center['sessions'];
 		let availableSessionsCount = 0;
 		let availableSession = {};
+		availableSession['Center'] = center['name'];
+		availableSession['Pincode'] = center['pincode'];
 		for(let session in sessions) {
 			let availableCapacity = sessions[session]['available_capacity'];
 			let minAgeLimit = sessions[session]['min_age_limit'];
@@ -38,8 +40,6 @@ const keepAvailableSessions = (centers) => {
 		    	continue;
 		    }
 		}
-		availableSession['Center'] = center['name'];
-		availableSession['Pincode'] = center['pincode'];
 		if (availableSessionsCount == 0) {
 			availableSession['MinAge'] = 18;
 			availableSession['Slots'] = 0;
