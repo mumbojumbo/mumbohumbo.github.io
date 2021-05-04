@@ -1,7 +1,21 @@
 
+const getTodaysDate = () => {
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; 
+	var yyyy = today.getFullYear();
+	if(dd<10) {
+	    dd='0'+dd;
+	} 
+
+	if(mm<10) {
+	    mm='0'+mm;
+	}
+	return dd+'-'+mm+'-'+yyyy;
+	}
 
 const findVaccineSlots = async () => {
-	let response = await fetch('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=294&date=01-05-2021');
+	let response = await fetch('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=294&date=' + getTodaysDate());
 	let slots = await response.json(); 
 	return slots;
 }
@@ -17,6 +31,8 @@ const keepAndPrintUnderFortyFiveCenters = (center) => {
 		return false;
 	}
 
+
+	
 
 const keepAvailableSessions = (centers) => {
 	let availableSessions = [];
